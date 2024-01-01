@@ -2,6 +2,7 @@ package com.codewithAbz.fullstackbackend.controller;
 
 import com.codewithAbz.fullstackbackend.exception.UserNotFoundException;
 import com.codewithAbz.fullstackbackend.model.User;
+import com.codewithAbz.fullstackbackend.model.constant.Role;
 import com.codewithAbz.fullstackbackend.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,11 @@ public class UserController {
     @GetMapping("/users") // Returns all the users
     List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    @GetMapping("/users/{role}")
+    List<User> getUsersForRole(@PathVariable Role role){
+        return userRepository.findByRole(role);
     }
 
     @GetMapping("/user/{id}")

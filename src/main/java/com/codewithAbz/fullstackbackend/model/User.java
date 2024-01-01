@@ -1,8 +1,7 @@
 package com.codewithAbz.fullstackbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.codewithAbz.fullstackbackend.model.constant.Role;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,6 +30,17 @@ public class User {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
+
+    @Enumerated(EnumType.STRING) //annotation is used to specify that the enum values should be stored as strings in the database.
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Long getId() { // Can create the getters and setters by 2 ways, either cmd + n OR right click and click generate
         return id;
