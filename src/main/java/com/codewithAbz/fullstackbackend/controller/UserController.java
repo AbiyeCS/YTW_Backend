@@ -2,6 +2,7 @@ package com.codewithAbz.fullstackbackend.controller;
 
 import com.codewithAbz.fullstackbackend.exception.UserNotFoundException;
 import com.codewithAbz.fullstackbackend.model.User;
+import com.codewithAbz.fullstackbackend.model.constant.Role;
 import com.codewithAbz.fullstackbackend.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,11 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/users/{role}")
+    List<User> getUsersForRole(@PathVariable Role role){
+        return userRepository.findByRole(role);
+    }
+
     @GetMapping("/user/{id}")
     User getUserById(@PathVariable Long id){
         return userRepository.findById(id)
@@ -97,6 +103,7 @@ public class UserController {
                     user.setUsername(newUser.getUsername());
                     user.setName(newUser.getName());
                     user.setEmail(newUser.getEmail());
+                    user.setRole(newUser.getRole());
                     return userRepository.save(user);
                 }).orElseThrow(() -> new UserNotFoundException(id));
     }
