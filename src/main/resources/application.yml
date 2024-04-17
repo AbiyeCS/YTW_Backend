@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/fullstack
+    username: root
+    password: Cristopher98!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    locations: classpath:dbmigration
+    repair: true
+logging:
+  level:
+    org:
+      hibernate: DEBUG
+      springframework: DEBUG
